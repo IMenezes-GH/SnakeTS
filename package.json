@@ -1,0 +1,17 @@
+{
+  "name": "node_noodle",
+  "version": "1.0.0",
+  "description": "A snake rpg game",
+  "main": "./dist/main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo $(pwd)"
+  },
+  "keywords": [
+    "game",
+    "snake",
+    "canvas"
+  ],
+  "author": "IMenezes",
+  "license": "ISC"
+}
