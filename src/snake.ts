@@ -30,7 +30,7 @@ export class Segment{
         this.x = coordinates.x
         this.y = coordinates.y
         this.ctx = ctx
-        this.ctx.fillStyle = 'green'
+        this.ctx.fillStyle = '#03D9FF'
         this.movementDirection = {x: 0, y: -1}
     }
 
