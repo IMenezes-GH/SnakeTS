@@ -10,6 +10,7 @@ interface Coordinates {
     y: number,
 }
 
+// Might be redundant
 interface Vector {
     x: number,
     y: number
