@@ -16,6 +16,12 @@ interface Vector {
     y: number
 }
 
+export class Snake{
+    static body: Array<Segment> = []
+    static head: Head
+}
+
+
 abstract class Segment{
 
     static height = 16
@@ -58,7 +64,7 @@ abstract class Segment{
     }
 }
 
-export class Body extends Segment{
+export class BodySegment extends Segment{
 
     constructor(coordinates:Coordinates, ctx:RenderingContext, color='#00CF97'){
         super(coordinates, ctx, color)

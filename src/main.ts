@@ -1,27 +1,26 @@
-import { Body, Head } from "./snake.js"
+import { BodySegment, Head, Snake } from "./snake.js"
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
 const ctx: CanvasRenderingContext2D = canvas.getContext('2d')!
 
 // CONFIG ==========================================
+
 const MS_PER_FRAME: number = 30
 canvas.height = window.innerHeight * 0.9 // SQUARE LAYOUT
 canvas.width = window.innerHeight * 0.9 // SQUARE LAYOUT
-// ==================================================
 
 async function sleep(timeMS : number): Promise<any>{
     return new Promise(resolve => setTimeout(resolve, timeMS))
 }
+// ==================================================
+// SNAKE CREATION ==============================================
 
-// const TESTING_SNAKE = new Head({x:canvas.width / 2, y:canvas.height / 2}, ctx)
-const SNAKE_HEAD : Head = new Head({x: canvas.width / 2, y: canvas.height / 2}, ctx)
-const TESTING_SNAKE = [
-                        SNAKE_HEAD,
-                        new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx),
-                        new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx),
-                        new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx)
-                    ]
-                    
+Snake.head = new Head({x: canvas.width / 2, y: canvas.height / 2}, ctx)
+Snake.body.push(Snake.head)
+for (let i = 0; i < 4; i++){
+    Snake.body.push(new BodySegment({x: canvas.width / 2, y: canvas.height / 2}, ctx))
+}
+
 /**
  * Main Game loop
 */
@@ -32,17 +31,17 @@ async function gameLoop(): Promise<void>{
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         
         
-        for (let i = TESTING_SNAKE.length - 1 ; i > 0; i--){
-            TESTING_SNAKE[i].goTo(
+        for (let i = Snake.body.length - 1 ; i > 0; i--){
+            Snake.body[i].goTo(
                 {
-                    x: TESTING_SNAKE[i - 1].x, 
-                    y: TESTING_SNAKE[i - 1].y
+                    x: Snake.body[i - 1].x, 
+                    y: Snake.body[i - 1].y
                 })
             }
             
-        SNAKE_HEAD.move(SNAKE_HEAD.movementDirection)
+        Snake.head.move(Snake.head.movementDirection)
             
-        const distanceOfWall = SNAKE_HEAD.distanceOfWall() // checks Snake head's distance from wall
+        const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
         if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20){
             loop = false
         } 
@@ -55,25 +54,25 @@ async function gameLoop(): Promise<void>{
             switch (KEY){
                 case 'D':
                 case 'ARROWRIGHT':
-                    SNAKE_HEAD.setMovement({x: 1, y: 0})
+                    Snake.head.setMovement({x: 1, y: 0})
 
                     break
 
                 case 'W':
                 case 'ARROWUP':
-                    SNAKE_HEAD.setMovement({x: 0, y: -1})
+                    Snake.head.setMovement({x: 0, y: -1})
 
                     break
 
                 case 'A':
                 case 'ARROWLEFT':
-                    SNAKE_HEAD.setMovement({x: -1, y: 0})
+                    Snake.head.setMovement({x: -1, y: 0})
 
                     break
 
                 case 'S':
                 case 'ARROWDOWN':
-                    SNAKE_HEAD.setMovement({x: 0, y: 1})
+                    Snake.head.setMovement({x: 0, y: 1})
 
                     break
 
