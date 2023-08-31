@@ -14,7 +14,7 @@ async function sleep(timeMS : number): Promise<any>{
 }
 
 const TESTING_SNAKE = new Segment({x:canvas.width / 2, y:canvas.height / 2}, ctx)
-const TESTING_OBSTACLE = new Segment({x: 100, y: 100}, ctx)
+const TESTING_OBSTACLE = new Segment({x: 100, y: 100}, ctx, 'green')
 TESTING_OBSTACLE.draw()
 /**
  * Main Game loop

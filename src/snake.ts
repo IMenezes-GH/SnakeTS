@@ -26,21 +26,25 @@ export class Segment{
     y: number
     ctx: any
     movementDirection: Vector
+    color: string
 
-    constructor(coordinates: Coordinates, ctx:RenderingContext){
+    constructor(coordinates: Coordinates, ctx:RenderingContext, color = '#03D9FF'){
         this.x = coordinates.x
         this.y = coordinates.y
+        this.color = color
         this.ctx = ctx
-        this.ctx.fillStyle = '#03D9FF'
         this.movementDirection = {x: 0, y: -1}
     }
 
     draw(){
+
+        this.ctx.fillStyle = this.color
         this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
         this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
     }
 
     move(movement: Vector){
+        this.ctx.fillStyle = this.color
         this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
         this.x = this.x + this.movementDirection.x * Segment.velocity
         this.y = this.y + this.movementDirection.y * Segment.velocity
