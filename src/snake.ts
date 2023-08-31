@@ -53,6 +53,22 @@ abstract class Segment{
     
 }
 
+export class Body extends Segment{
+
+    constructor(coordinates:Coordinates, ctx:RenderingContext, color='green'){
+        super(coordinates, ctx, color)
+    }
+
+    goTo(coordinates:Coordinates){
+        this.ctx.fillStyle = this.color
+        this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
+        this.x = coordinates.x
+        this.y = coordinates.y
+        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
+    }
+}
+
+
 export class Head extends Segment{
     
     constructor(coordinates:Coordinates, ctx:RenderingContext, color='#03D9FF'){
