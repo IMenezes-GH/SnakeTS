@@ -28,7 +28,7 @@ abstract class Segment{
     movementDirection: Vector
     color: string
 
-    constructor(coordinates: Coordinates, ctx:RenderingContext, color = '#03D9FF'){
+    constructor(coordinates: Coordinates, ctx:RenderingContext, color = '#00CF97'){
         this.x = coordinates.x
         this.y = coordinates.y
         this.color = color
@@ -60,7 +60,7 @@ abstract class Segment{
 
 export class Body extends Segment{
 
-    constructor(coordinates:Coordinates, ctx:RenderingContext, color='green'){
+    constructor(coordinates:Coordinates, ctx:RenderingContext, color='#00CF97'){
         super(coordinates, ctx, color)
     }
 }
@@ -69,7 +69,7 @@ export class Body extends Segment{
 
 export class Head extends Segment{
     
-    constructor(coordinates:Coordinates, ctx:RenderingContext, color='#03D9FF'){
+    constructor(coordinates:Coordinates, ctx:RenderingContext, color='#00CF97'){
         super(coordinates, ctx, color)
     }
 

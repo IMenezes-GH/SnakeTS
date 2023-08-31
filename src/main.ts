@@ -14,12 +14,12 @@ async function sleep(timeMS : number): Promise<any>{
 }
 
 // const TESTING_SNAKE = new Head({x:canvas.width / 2, y:canvas.height / 2}, ctx)
-const SNAKE_HEAD : Head = new Head({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green')
+const SNAKE_HEAD : Head = new Head({x: canvas.width / 2, y: canvas.height / 2}, ctx)
 const TESTING_SNAKE = [
                         SNAKE_HEAD,
-                        new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green'),
-                        new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green'),
-                        new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green')
+                        new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx),
+                        new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx),
+                        new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx)
                     ]
                     
 /**
