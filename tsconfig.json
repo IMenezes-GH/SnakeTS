@@ -4,7 +4,6 @@
         "target": "ES2020",
         "strict": true,
         "outDir": "./dist",
-        // "moduleResolution": "classic",
         "allowSyntheticDefaultImports": true
     },
     "include": ["./src"]
