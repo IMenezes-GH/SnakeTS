@@ -20,7 +20,7 @@ abstract class Segment{
 
     static height = 20
     static width = 20
-    static velocity = 3
+    static velocity = 20
 
     x: number
     y: number
@@ -39,18 +39,29 @@ abstract class Segment{
     draw(){
 
         this.ctx.fillStyle = this.color
-        this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
+        // this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
         this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
     }
 
     move(movement: Vector){
         this.ctx.fillStyle = this.color
-        this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
+        // this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
         this.x = this.x + this.movementDirection.x * Segment.velocity
         this.y = this.y + this.movementDirection.y * Segment.velocity
         this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
     }
+
+    goTo(coordinates:Coordinates){
+        this.ctx.fillStyle = this.color
+        // this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
+        this.x = coordinates.x  
+        this.y = coordinates.y
+        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
+    }
     
+    valueOf(){
+        return this
+    }
 }
 
 export class Body extends Segment{
@@ -58,15 +69,8 @@ export class Body extends Segment{
     constructor(coordinates:Coordinates, ctx:RenderingContext, color='green'){
         super(coordinates, ctx, color)
     }
-
-    goTo(coordinates:Coordinates){
-        this.ctx.fillStyle = this.color
-        this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
-        this.x = coordinates.x
-        this.y = coordinates.y
-        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
-    }
 }
+
 
 
 export class Head extends Segment{
