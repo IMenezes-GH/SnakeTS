@@ -72,7 +72,28 @@ export class Segment{
     }
 
     isHitting(coordinates: Coordinates): boolean{
-        return this.x - coordinates.x <= 10 && this.y - coordinates.y <= 10
+        let distance: Coordinates = {
+            x : 0,
+            y : 0
+        }
+
+        
+        if (this.x - coordinates.x > 0){
+            distance.x = this.x - coordinates.x - Segment.width
+        } else {
+            distance.x = coordinates.x - this.x - Segment.width
+        }
+        
+        if (this.y - coordinates.y > 0){
+            distance.y = this.y - coordinates.y - Segment.height
+        } else {
+            distance.y = coordinates.y - this.y - Segment.height
+        }
+        
+        console.log(distance.x, distance.y)
+        return  distance.x <= 0 && distance.y <= 0
+
+
     }
 
 }

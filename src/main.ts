@@ -14,7 +14,8 @@ async function sleep(timeMS : number): Promise<any>{
 }
 
 const TESTING_SNAKE = new Segment({x:canvas.width / 2, y:canvas.height / 2}, ctx)
-
+const TESTING_OBSTACLE = new Segment({x: 100, y: 100}, ctx)
+TESTING_OBSTACLE.draw()
 /**
  * Main Game loop
  */
@@ -29,6 +30,10 @@ async function gameLoop(): Promise<void>{
             loop = false
         } else {
             TESTING_SNAKE.move(TESTING_SNAKE.movementDirection)
+        }
+
+        if (TESTING_SNAKE.isHitting({x: TESTING_OBSTACLE.x, y: TESTING_OBSTACLE.y})){
+            loop = false
         }
 
 
