@@ -1,4 +1,4 @@
-import { Segment } from "./snake.js"
+import { Head } from "./snake.js"
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
 const ctx: CanvasRenderingContext2D = canvas.getContext('2d')!
@@ -13,9 +13,9 @@ async function sleep(timeMS : number): Promise<any>{
     return new Promise(resolve => setTimeout(resolve, timeMS))
 }
 
-const TESTING_SNAKE = new Segment({x:canvas.width / 2, y:canvas.height / 2}, ctx)
-const TESTING_OBSTACLE = new Segment({x: 100, y: 100}, ctx, 'green')
-TESTING_OBSTACLE.draw()
+const TESTING_SNAKE = new Head({x:canvas.width / 2, y:canvas.height / 2}, ctx)
+// const TESTING_OBSTACLE = new Segment({x: 100, y: 100}, ctx, 'green')
+// TESTING_OBSTACLE.draw()
 /**
  * Main Game loop
  */
@@ -32,9 +32,9 @@ async function gameLoop(): Promise<void>{
             TESTING_SNAKE.move(TESTING_SNAKE.movementDirection)
         }
 
-        if (TESTING_SNAKE.isHitting({x: TESTING_OBSTACLE.x, y: TESTING_OBSTACLE.y})){
-            loop = false
-        }
+        // if (TESTING_SNAKE.isHitting({x: TESTING_OBSTACLE.x, y: TESTING_OBSTACLE.y})){
+        //     loop = false
+        // }
 
 
         // KEY EVENTS ========================================

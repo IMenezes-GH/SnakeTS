@@ -16,7 +16,7 @@ interface Vector {
     y: number
 }
 
-export class Segment{
+abstract class Segment{
 
     static height = 20
     static width = 20
@@ -51,37 +51,42 @@ export class Segment{
         this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
     }
     
+}
+
+export class Head extends Segment{
+    
+    constructor(coordinates:Coordinates, ctx:RenderingContext, color='#03D9FF'){
+        super(coordinates, ctx, color)
+    }
+    distanceOfWall(): Coordinates{
+        let distance: Coordinates = {
+            x: this.x >= WINDOW_SIZE.WIDTH / 2 ? WINDOW_SIZE.WIDTH - this.x : this.x + Segment.width,
+            y : this.y >= WINDOW_SIZE.HEIGHT / 2 ? WINDOW_SIZE.HEIGHT - this.y : this.y + Segment.height 
+        }
+    
+        return distance
+    }
+    
+    isHitting(coordinates: Coordinates): boolean{
+        let distance: Coordinates = {
+            x : this.x - coordinates.x > 0 ? this.x - coordinates.x - Segment.width : coordinates.x - this.x - Segment.width,
+            y : this.y - coordinates.y > 0 ? this.y - coordinates.y - Segment.height : coordinates.y - this.y - Segment.height
+        }
+        
+        return distance.x - Segment.velocity <= 0 && distance.y - Segment.velocity <= 0 
+        
+    }
     setMovement(vector: Vector){
         if (vector.x === 1 || vector.x === -1){
             if (this.movementDirection.x === 0){
                 this.movementDirection = vector
             }
         }
-
+    
         if (vector.y === 1 || vector.y === -1){
             if (this.movementDirection.y === 0){
                 this.movementDirection = vector
             }
         }
-    }
-
-    distanceOfWall(): Coordinates{
-
-        let distance: Coordinates = {
-            x: this.x >= WINDOW_SIZE.WIDTH / 2 ? WINDOW_SIZE.WIDTH - this.x : this.x + Segment.width,
-            y : this.y >= WINDOW_SIZE.HEIGHT / 2 ? WINDOW_SIZE.HEIGHT - this.y : this.y + Segment.height 
-        }
-
-        return distance
-    }
-
-    isHitting(coordinates: Coordinates): boolean{
-        let distance: Coordinates = {
-            x : this.x - coordinates.x > 0 ? this.x - coordinates.x - Segment.width : coordinates.x - this.x - Segment.width,
-            y : this.y - coordinates.y > 0 ? this.y - coordinates.y - Segment.height : coordinates.y - this.y - Segment.height
-        }
-
-        return distance.x - Segment.velocity <= 0 && distance.y - Segment.velocity <= 0 
-
     }
 }
