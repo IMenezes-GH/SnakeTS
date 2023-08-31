@@ -18,9 +18,9 @@ interface Vector {
 
 abstract class Segment{
 
-    static height = 20
-    static width = 20
-    static velocity = 20
+    static height = 16
+    static width = 16
+    static velocity = 8
 
     x: number
     y: number
@@ -72,6 +72,14 @@ export class Head extends Segment{
     constructor(coordinates:Coordinates, ctx:RenderingContext, color='#03D9FF'){
         super(coordinates, ctx, color)
     }
+
+    draw(){
+        this.ctx.fillStyle = this.color
+        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
+        this.ctx.fillStyle = 'black'
+        this.ctx.fillRect(this.x + 5, this.y + 5, 6, 4)
+    }
+
     distanceOfWall(): Coordinates{
         let distance: Coordinates = {
             x: this.x >= WINDOW_SIZE.WIDTH / 2 ? WINDOW_SIZE.WIDTH - this.x : this.x + Segment.width,
