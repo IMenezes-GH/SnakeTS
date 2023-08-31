@@ -95,7 +95,7 @@ export class Segment{
         }
         
         console.log(distance.x, distance.y)
-        return  distance.x <= 0 && distance.y <= 0
+        return  distance.x - Segment.velocity <= 0 && distance.y - Segment.velocity <= 0 
 
 
     }
