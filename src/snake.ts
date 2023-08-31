@@ -77,27 +77,11 @@ export class Segment{
 
     isHitting(coordinates: Coordinates): boolean{
         let distance: Coordinates = {
-            x : 0,
-            y : 0
+            x : this.x - coordinates.x > 0 ? this.x - coordinates.x - Segment.width : coordinates.x - this.x - Segment.width,
+            y : this.y - coordinates.y > 0 ? this.y - coordinates.y - Segment.height : coordinates.y - this.y - Segment.height
         }
 
-        
-        if (this.x - coordinates.x > 0){
-            distance.x = this.x - coordinates.x - Segment.width
-        } else {
-            distance.x = coordinates.x - this.x - Segment.width
-        }
-        
-        if (this.y - coordinates.y > 0){
-            distance.y = this.y - coordinates.y - Segment.height
-        } else {
-            distance.y = coordinates.y - this.y - Segment.height
-        }
-        
-        console.log(distance.x, distance.y)
-        return  distance.x - Segment.velocity <= 0 && distance.y - Segment.velocity <= 0 
-
+        return distance.x - Segment.velocity <= 0 && distance.y - Segment.velocity <= 0 
 
     }
-
 }
