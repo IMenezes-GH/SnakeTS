@@ -1,3 +1,9 @@
+// import { WINDOW_SIZE } from "./main"
+
+const WINDOW_SIZE = {
+    HEIGHT: window.innerHeight * 0.9,
+    WIDTH: window.innerHeight * 0.9
+}
 
 interface Coordinates {
     x: number,
@@ -52,8 +58,41 @@ export class Segment{
                 this.movementDirection = vector
             }
         }
-        
-    
+    }
+
+    distanceOfWall(){
+        // if (this.x <= 0 || this.x >= WINDOW_SIZE.WIDTH){
+        //     return 
+        // }
+
+        let distance = {
+            x_distance : 0,
+            y_distance : 0
+        }
+
+        if (this.x >= WINDOW_SIZE.WIDTH / 2){
+            distance.x_distance = WINDOW_SIZE.WIDTH - this.x 
+        } else {
+            distance.x_distance = this.x + Segment.width
+        }
+
+        if (this.y >= WINDOW_SIZE.HEIGHT / 2){
+            distance.y_distance = WINDOW_SIZE.HEIGHT - this.y 
+        } else {
+            distance.y_distance = this.y + Segment.height
+        }
+
+        return distance
+    }
+
+    isHitting(coordinates: Coordinates){
+        if (this.x - coordinates.x <= 10 && this.y - coordinates.y <= 10){
+            return true
+        }
+        else {
+            return false
+        }
+
     }
 
 }

@@ -13,7 +13,7 @@ async function sleep(timeMS : number): Promise<any>{
     return new Promise(resolve => setTimeout(resolve, timeMS))
 }
 
-const TESTING_SNAKE = new Segment({x:0, y:0}, ctx)
+const TESTING_SNAKE = new Segment({x:100, y:100}, ctx)
 
 /**
  * Main Game loop
@@ -24,8 +24,15 @@ async function gameLoop(): Promise<void>{
     while(loop){
 
         await sleep(MS_PER_FRAME)
-        console.log(loop)
-        TESTING_SNAKE.move(TESTING_SNAKE.movement)
+        // console.log(loop)
+        // console.log(TESTING_SNAKE.x, TESTING_SNAKE.y)
+        const distanceOfWall = TESTING_SNAKE.distanceOfWall()
+
+        if (distanceOfWall.x_distance <= 20 || distanceOfWall.y_distance <= 20){
+            loop = false
+        }
+
+        TESTING_SNAKE.move(TESTING_SNAKE.movementDirection)
 
         // KEY EVENTS ========================================
         document.addEventListener(('keydown'), (event) => {
