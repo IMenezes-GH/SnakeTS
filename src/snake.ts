@@ -60,39 +60,18 @@ export class Segment{
         }
     }
 
-    distanceOfWall(){
-        // if (this.x <= 0 || this.x >= WINDOW_SIZE.WIDTH){
-        //     return 
-        // }
+    distanceOfWall(): Coordinates{
 
-        let distance = {
-            x_distance : 0,
-            y_distance : 0
-        }
-
-        if (this.x >= WINDOW_SIZE.WIDTH / 2){
-            distance.x_distance = WINDOW_SIZE.WIDTH - this.x 
-        } else {
-            distance.x_distance = this.x + Segment.width
-        }
-
-        if (this.y >= WINDOW_SIZE.HEIGHT / 2){
-            distance.y_distance = WINDOW_SIZE.HEIGHT - this.y 
-        } else {
-            distance.y_distance = this.y + Segment.height
+        let distance: Coordinates = {
+            x: this.x >= WINDOW_SIZE.WIDTH / 2 ? WINDOW_SIZE.WIDTH - this.x : this.x + Segment.width,
+            y : this.y >= WINDOW_SIZE.HEIGHT / 2 ? WINDOW_SIZE.HEIGHT - this.y : this.y + Segment.height 
         }
 
         return distance
     }
 
-    isHitting(coordinates: Coordinates){
-        if (this.x - coordinates.x <= 10 && this.y - coordinates.y <= 10){
-            return true
-        }
-        else {
-            return false
-        }
-
+    isHitting(coordinates: Coordinates): boolean{
+        return this.x - coordinates.x <= 10 && this.y - coordinates.y <= 10
     }
 
 }

@@ -22,17 +22,15 @@ async function gameLoop(): Promise<void>{
     let loop : boolean = true
 
     while(loop){
-
         await sleep(MS_PER_FRAME)
-        // console.log(loop)
-        // console.log(TESTING_SNAKE.x, TESTING_SNAKE.y)
-        const distanceOfWall = TESTING_SNAKE.distanceOfWall()
 
-        if (distanceOfWall.x_distance <= 20 || distanceOfWall.y_distance <= 20){
+        const distanceOfWall = TESTING_SNAKE.distanceOfWall() // checks Snake head's distance from wall
+        if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20){
             loop = false
+        } else {
+            TESTING_SNAKE.move(TESTING_SNAKE.movementDirection)
         }
 
-        TESTING_SNAKE.move(TESTING_SNAKE.movementDirection)
 
         // KEY EVENTS ========================================
         document.addEventListener(('keydown'), (event) => {
