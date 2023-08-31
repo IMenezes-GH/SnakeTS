@@ -15,7 +15,7 @@ async function sleep(timeMS : number): Promise<any>{
 
 // const TESTING_SNAKE = new Head({x:canvas.width / 2, y:canvas.height / 2}, ctx)
 const SNAKE_HEAD : Head = new Head({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green')
-const TESTING_SNAKE = [SNAKE_HEAD, new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green'), new Body({x:100, y:140}, ctx, 'green'), new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green')]
+const TESTING_SNAKE = [SNAKE_HEAD, new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green'), new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green'), new Body({x: canvas.width / 2, y: canvas.height / 2}, ctx, 'green')]
 
 /**
  * Main Game loop
@@ -24,8 +24,9 @@ async function gameLoop(): Promise<void>{
     let loop : boolean = true
     while(loop){
         await sleep(MS_PER_FRAME)
-
         ctx.clearRect(0, 0, canvas.width, canvas.height)
+        
+        SNAKE_HEAD.move(SNAKE_HEAD.movementDirection)
         
         for (let i = TESTING_SNAKE.length - 1 ; i > 0; i--){
             TESTING_SNAKE[i].goTo(
@@ -33,9 +34,8 @@ async function gameLoop(): Promise<void>{
                     x: TESTING_SNAKE[i - 1].x, 
                     y: TESTING_SNAKE[i - 1].y
                 })
-        }
-
-        SNAKE_HEAD.move(SNAKE_HEAD.movementDirection)
+            }
+            
 
         const distanceOfWall = SNAKE_HEAD.distanceOfWall() // checks Snake head's distance from wall
         if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20){

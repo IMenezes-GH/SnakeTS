@@ -37,26 +37,20 @@ abstract class Segment{
     }
 
     draw(){
-
         this.ctx.fillStyle = this.color
-        // this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
         this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
     }
 
     move(movement: Vector){
-        this.ctx.fillStyle = this.color
-        // this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
         this.x = this.x + this.movementDirection.x * Segment.velocity
         this.y = this.y + this.movementDirection.y * Segment.velocity
-        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
+        this.draw()
     }
 
     goTo(coordinates:Coordinates){
-        this.ctx.fillStyle = this.color
-        // this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
         this.x = coordinates.x  
         this.y = coordinates.y
-        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
+        this.draw()
     }
     
     valueOf(){
