@@ -18,14 +18,14 @@ export class Segment{
     x: number
     y: number
     ctx: any
-    movement: Vector
+    movementDirection: Vector
 
     constructor(coordinates: Coordinates, ctx:RenderingContext){
         this.x = coordinates.x
         this.y = coordinates.y
         this.ctx = ctx
         this.ctx.fillStyle = 'green'
-        this.movement = {x: 1, y: 0}
+        this.movementDirection = {x: 1, y: 0}
     }
 
     draw(){
@@ -35,13 +35,25 @@ export class Segment{
 
     move(movement: Vector){
         this.ctx.clearRect(this.x, this.y, Segment.height, Segment.width)
-        this.x = this.x + this.movement.x * Segment.velocity
-        this.y = this.y + this.movement.y * Segment.velocity
+        this.x = this.x + this.movementDirection.x * Segment.velocity
+        this.y = this.y + this.movementDirection.y * Segment.velocity
         this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
     }
     
     setMovement(vector: Vector){
-        this.movement = vector
+        if (vector.x === 1 || vector.x === -1){
+            if (this.movementDirection.x === 0){
+                this.movementDirection = vector
+            }
+        }
+
+        if (vector.y === 1 || vector.y === -1){
+            if (this.movementDirection.y === 0){
+                this.movementDirection = vector
+            }
+        }
+        
+    
     }
 
 }
