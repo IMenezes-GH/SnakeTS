@@ -5,8 +5,8 @@ const ctx: CanvasRenderingContext2D = canvas.getContext('2d')!
 
 // CONFIG ==========================================
 const MS_PER_FRAME: number = 10
-canvas.height = window.innerHeight * 0.7 // SQUARE LAYOUT
-canvas.width = window.innerHeight * 0.7 // SQUARE LAYOUT
+canvas.height = window.innerHeight * 0.9 // SQUARE LAYOUT
+canvas.width = window.innerHeight * 0.9 // SQUARE LAYOUT
 // ==================================================
 
 async function sleep(timeMS : number): Promise<any>{
@@ -31,24 +31,28 @@ async function gameLoop(): Promise<void>{
         document.addEventListener(('keydown'), (event) => {
     
             const KEY: string = event.key.toUpperCase()
-    
+
             switch (KEY){
                 case 'D':
+                case 'ARROWRIGHT':
                     TESTING_SNAKE.setMovement({x: 1, y: 0})
 
                     break
 
                 case 'W':
+                case 'ARROWUP':
                     TESTING_SNAKE.setMovement({x: 0, y: -1})
 
                     break
 
                 case 'A':
+                case 'ARROWLEFT':
                     TESTING_SNAKE.setMovement({x: -1, y: 0})
 
                     break
 
                 case 'S':
+                case 'ARROWDOWN':
                     TESTING_SNAKE.setMovement({x: 0, y: 1})
 
                     break
@@ -58,7 +62,6 @@ async function gameLoop(): Promise<void>{
                     loop = false
                     break
             }
-    
         })
     }
 }

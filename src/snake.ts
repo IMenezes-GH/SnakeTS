@@ -13,7 +13,7 @@ export class Segment{
 
     static height = 20
     static width = 20
-    static velocity = 5
+    static velocity = 3
 
     x: number
     y: number
