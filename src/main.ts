@@ -13,7 +13,7 @@ async function sleep(timeMS : number): Promise<any>{
     return new Promise(resolve => setTimeout(resolve, timeMS))
 }
 
-const TESTING_SNAKE = new Segment({x:100, y:100}, ctx)
+const TESTING_SNAKE = new Segment({x:canvas.width / 2, y:canvas.height / 2}, ctx)
 
 /**
  * Main Game loop
