@@ -112,7 +112,7 @@ async function gameLoop(): Promise<void> {
         await sleep(MS_PER_FRAME)
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         
-        if (Snake.tailMode && frame % 25 === 0){
+        if (Snake.tailMode && frame % 10 === 0){
             counter += 1
             for (let i = 1; i < counter; i++){
                 Snake.body[Snake.getSize() - i].setColor('red')
@@ -170,6 +170,8 @@ async function gameLoop(): Promise<void> {
     }
 
     if (gameOver){
+        counter = 0
+        Snake.tailMode = false
         Snake.head.die()
     }
 
