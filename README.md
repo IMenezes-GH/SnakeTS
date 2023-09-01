@@ -8,6 +8,6 @@ Snake game in typescript
 - [x] Pause, continue & restart
 - [x] Food
 - [ ] Scoreboard
-- [ ] Color change
+- [x] Color change
 - [ ] Tail segment
 - [ ] Misc. Customization (hats)
