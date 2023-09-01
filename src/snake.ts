@@ -17,6 +17,7 @@ interface Vector {
 export class Snake{
     static body: Array<Segment> = []
     static head: Head
+    static ctx: CanvasRenderingContext2D
     
     static setHead(head: Head){
         Snake.head = head
@@ -32,7 +33,7 @@ export class Snake{
     static getSize() : number{
         return Snake.body.length
     }
-
+    
 }
 
 abstract class Segment{
@@ -47,17 +48,16 @@ abstract class Segment{
     movementDirection: Vector
     color: string
 
-    constructor(coordinates: Coordinates, ctx:RenderingContext, color = '#00CF97'){
+    constructor(coordinates: Coordinates, color = '#00CF97'){
         this.x = coordinates.x
         this.y = coordinates.y
         this.color = color
-        this.ctx = ctx
         this.movementDirection = {x: 0, y: -1}
     }
 
     draw(){
-        this.ctx.fillStyle = this.color
-        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
+        Snake.ctx.fillStyle = this.color
+        Snake.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
     }
 
     move(){
@@ -75,8 +75,8 @@ abstract class Segment{
 
 export class BodySegment extends Segment{
 
-    constructor(coordinates:Coordinates, ctx:RenderingContext, color='#00CF97'){
-        super(coordinates, ctx, color)
+    constructor(coordinates:Coordinates, color='#00CF97'){
+        super(coordinates, color)
     }
 }
 
@@ -84,32 +84,32 @@ export class BodySegment extends Segment{
 
 export class Head extends Segment{
     
-    constructor(coordinates:Coordinates, ctx:RenderingContext, color='#00CF97'){
-        super(coordinates, ctx, color)
+    constructor(coordinates:Coordinates, color='#00CF97'){
+        super(coordinates, color)
     }
 
     draw(){
-        this.ctx.fillStyle = this.color
-        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
-        this.ctx.fillStyle = 'black'
-        this.ctx.fillRect(this.x + 5, this.y + 5, 6, 4)
+        Snake.ctx.fillStyle = this.color
+        Snake.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
+        Snake.ctx.fillStyle = 'black'
+        Snake.ctx.fillRect(this.x + 5, this.y + 5, 6, 4)
 
         // TODO: Make a cute snake tongue ?
     }
 
     die(){
-        this.ctx.fillStyle = this.color
-        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
+        Snake.ctx.fillStyle = this.color
+        Snake.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
         
-        this.ctx.beginPath()
-        this.ctx.strokeStyle = 'black'
-        this.ctx.moveTo(this.x + 5, this.y + 5)
-        this.ctx.lineTo(this.x + 10, this.y + 10)
-        this.ctx.moveTo(this.x + 10, this.y + 5)
-        this.ctx.lineTo(this.x + 5, this.y + 10)
+        Snake.ctx.beginPath()
+        Snake.ctx.strokeStyle = 'black'
+        Snake.ctx.moveTo(this.x + 5, this.y + 5)
+        Snake.ctx.lineTo(this.x + 10, this.y + 10)
+        Snake.ctx.moveTo(this.x + 10, this.y + 5)
+        Snake.ctx.lineTo(this.x + 5, this.y + 10)
 
-        this.ctx.lineWidth = 2
-        this.ctx.stroke()
+        Snake.ctx.lineWidth = 2
+        Snake.ctx.stroke()
     }
 
     distanceOfWall(): Coordinates{

@@ -1,3 +1,4 @@
+import { Food, Pellet } from "./food.js"
 import { BodySegment, Head, Snake } from "./snake.js"
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
@@ -20,15 +21,19 @@ async function sleep(timeMS: number): Promise<any> {
 // SNAKE CREATION ==============================================
 
 function createPlayer() {
+    Food.ctx = ctx
+    Snake.ctx = ctx
 
     Snake.body = []
-    Snake.setHead(new Head({ x: canvas.width / 2, y: canvas.height / 2 }, ctx))
+    Snake.setHead(new Head({ x: canvas.width / 2, y: canvas.height / 2 }))
 
     for (let i = 0; i < 4; i++) {
-        Snake.addBody(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }, ctx))
+        Snake.addBody(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }))
     }
 }
 createPlayer()
+
+const testFood = new Pellet({x: 100, y: 100})
 
 
 // KEY EVENTS ========================================
@@ -79,7 +84,7 @@ document.addEventListener(('keydown'), (event) => {
             break
 
         case 'E':
-            Snake.body.push(new BodySegment({ x: Snake.head.x, y: Snake.head.y }, ctx))
+            Snake.body.push(new BodySegment({ x: Snake.head.x, y: Snake.head.y }))
             break
     }
 })
@@ -93,6 +98,7 @@ async function gameLoop(): Promise<void> {
 
         await sleep(MS_PER_FRAME)
         ctx.clearRect(0, 0, canvas.width, canvas.height)
+        testFood.draw()
 
 
         for (let i = Snake.body.length - 1; i > 0; i--) {
@@ -103,7 +109,7 @@ async function gameLoop(): Promise<void> {
                 })
         }
 
-        Snake.head.move(Snake.head.movementDirection)
+        Snake.head.move()
 
         const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
         if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20) {
