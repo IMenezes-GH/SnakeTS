@@ -1,4 +1,4 @@
-import { Coordinates } from "../types"
+import { Coordinates, RGB } from "../types"
 
 export abstract class Food {
     static height = 10
@@ -6,12 +6,11 @@ export abstract class Food {
     static ctx: CanvasRenderingContext2D
     static list: Array<Food> = []
 
-    color: string
+    color: string | RGB = 'rgb(255, 255, 255)'
     coordinates: Coordinates
     center: Coordinates
 
     constructor(coordinates: Coordinates){
-        this.color = 'red'
         this.coordinates = coordinates
         this.center = {
             x: this.coordinates.x + Food.width / 2,
@@ -28,7 +27,7 @@ export abstract class Food {
 export class Pellet extends Food {
     constructor(coordinates: Coordinates){
         super(coordinates)
-        this.color = 'yellow'
+        this.color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`
     }
 
     draw(): void {
