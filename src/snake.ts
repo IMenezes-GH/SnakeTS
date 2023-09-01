@@ -84,6 +84,8 @@ export class Head extends Segment{
         this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
         this.ctx.fillStyle = 'black'
         this.ctx.fillRect(this.x + 5, this.y + 5, 6, 4)
+
+        // TODO: Make a cute snake tongue ?
     }
 
     die(){
