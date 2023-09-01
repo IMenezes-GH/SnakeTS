@@ -24,6 +24,12 @@ export class Snake{
     static getSize() : number{
         return Snake.body.length
     }
+
+    static setColors(color : RGB) {
+        Snake.body.forEach((segment) => {
+            segment.setColor(color)
+        })
+    }
     
 }
 

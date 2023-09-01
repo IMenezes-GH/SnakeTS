@@ -6,7 +6,7 @@ export abstract class Food {
     static ctx: CanvasRenderingContext2D
     static list: Array<Food> = []
 
-    color: string | RGB = 'rgb(255, 255, 255)'
+    color: RGB = 'rgb(255, 255, 255)'
     coordinates: Coordinates
     center: Coordinates
 
