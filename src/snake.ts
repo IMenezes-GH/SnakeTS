@@ -17,8 +17,23 @@ interface Vector {
 export class Snake{
     static body: Array<Segment> = []
     static head: Head
-}
+    
+    static setHead(head: Head){
+        Snake.head = head
+        Snake.body[0] = head
+    }
 
+    static addBody(segment: BodySegment): void{
+        if (Snake.getSize() < 1) throw new Error('Snake body parts can only be added after the snake head')
+        
+        Snake.body.push(segment)
+    }
+
+    static getSize() : number{
+        return Snake.body.length
+    }
+
+}
 
 abstract class Segment{
 

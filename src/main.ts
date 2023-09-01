@@ -20,12 +20,12 @@ async function sleep(timeMS: number): Promise<any> {
 // SNAKE CREATION ==============================================
 
 function createPlayer() {
-    Snake.body = []
 
-    Snake.head = new Head({ x: canvas.width / 2, y: canvas.height / 2 }, ctx)
-    Snake.body[0] = (Snake.head)
+    Snake.body = []
+    Snake.setHead(new Head({ x: canvas.width / 2, y: canvas.height / 2 }, ctx))
+
     for (let i = 0; i < 4; i++) {
-        Snake.body.push(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }, ctx))
+        Snake.addBody(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }, ctx))
     }
 }
 createPlayer()
