@@ -3,6 +3,7 @@ import { BodySegment, Head, Snake } from "./snake.js"
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
 const ctx: CanvasRenderingContext2D = canvas.getContext('2d')!
+const score = document.getElementById('score') as HTMLHeadingElement
 
 // CONFIGURATION ==========================================
 
@@ -95,6 +96,8 @@ document.addEventListener(('keydown'), (event) => {
 */
 async function gameLoop(): Promise<void> {
     
+    score.innerText = (Snake.getSize() - 5).toString()
+
     while (loop && !gameOver) {
         
         await sleep(MS_PER_FRAME)
@@ -121,6 +124,7 @@ async function gameLoop(): Promise<void> {
                 Snake.addBody(new BodySegment(Food.pellet.coordinates))
                 Snake.setColors(Food.pellet.color)
                 canvas.style.borderColor = Food.pellet.color
+                score.innerText = (Snake.getSize() - 5).toString()
 
                 Food.pellet = new Pellet({
                     x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
