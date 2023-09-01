@@ -117,8 +117,8 @@ async function gameLoop(): Promise<void> {
             }
             
 
-            
-            if (Snake.head.distanceLesserThan(Food.list[0].coordinates, 15)){
+            console.log(Snake.head.x, Snake.head.y, Food.list[0].center)
+            if (Snake.head.distanceLesserThan(Food.list[0].center)){
                 Snake.addBody(new BodySegment(Food.list[0].coordinates))
                 
                 Food.list[0] = new Pellet({

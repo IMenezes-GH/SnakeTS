@@ -121,18 +121,20 @@ export class Head extends Segment{
         return distance
     }
     
-    distanceLesserThan(coordinates: Coordinates, compare: number): boolean{
+    distanceLesserThan(coordinates: Coordinates, compareWithValue: number = 16): boolean{
         let distance: Coordinates = {
-            x : this.x + Segment.width / 2 - coordinates.x > 0 
-            ? this.x + Segment.width / 2 - coordinates.x
-            : coordinates.x - this.x - Segment.width / 2,
+            x : this.x + (Segment.width / 2) - coordinates.x >= 0 
+            ? this.x + (Segment.width / 2) - coordinates.x
+            : coordinates.x - this.x - (Segment.width / 2),
 
-            y : this.y + Segment.height / 2 - coordinates.y > 0 
-            ? this.y + Segment.width / 2 - coordinates.y
-            : coordinates.y - this.y + Segment.width / 2 
+            y : this.y + (Segment.height / 2) - coordinates.y >= 0 
+            ? this.y + (Segment.height / 2) - coordinates.y
+            : coordinates.y - this.y - (Segment.height / 2) 
         }
+
+        console.log(distance)
         
-        return distance.x < compare && distance.y < compare
+        return distance.x < compareWithValue && distance.y < compareWithValue
         
     }
     setMovement(vector: Vector){

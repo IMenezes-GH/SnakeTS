@@ -11,10 +11,15 @@ export abstract class Food {
 
     color: string
     coordinates: Coordinates
+    center: Coordinates
 
     constructor(coordinates: Coordinates){
         this.color = 'red'
         this.coordinates = coordinates
+        this.center = {
+            x: this.coordinates.x + Food.width / 2,
+            y: this.coordinates.y + Food.height / 2
+        }
     }
 
     draw(){
