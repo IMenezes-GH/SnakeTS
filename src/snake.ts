@@ -1,5 +1,3 @@
-// import { WINDOW_SIZE } from "./main"
-
 const WINDOW_SIZE = {
     HEIGHT: window.innerHeight * 0.9,
     WIDTH: window.innerHeight * 0.9
