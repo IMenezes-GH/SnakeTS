@@ -17,7 +17,7 @@ interface Vector {
 export class Snake{
     static body: Array<Segment> = []
     static head: Head
-    static ctx: RenderingContext
+    static ctx: CanvasRenderingContext2D
     
     static setHead(head: Head){
         Snake.head = head
@@ -34,7 +34,7 @@ export class Snake{
         return Snake.body.length
     }
 
-    static setContext(ctx: RenderingContext){
+    static setContext(ctx: CanvasRenderingContext2D){
         Snake.ctx = ctx
     }
 
