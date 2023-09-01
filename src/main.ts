@@ -7,6 +7,7 @@ const ctx: CanvasRenderingContext2D = canvas.getContext('2d')!
 
 const MS_PER_FRAME: number = 30
 let loop : boolean = true
+let gameOver: boolean = false
 
 canvas.height = window.innerHeight * 0.9 // SQUARE LAYOUT
 canvas.width = window.innerHeight * 0.9 // SQUARE LAYOUT
@@ -76,7 +77,7 @@ document.addEventListener(('keydown'), (event) => {
 */
 async function gameLoop(): Promise<void>{
     
-    while (loop){
+    while (loop && !gameOver){
 
         await sleep(MS_PER_FRAME)
         ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -94,7 +95,7 @@ async function gameLoop(): Promise<void>{
             
         const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
         if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20){
-            loop = false
+            gameOver = true
         } 
     }
 }
