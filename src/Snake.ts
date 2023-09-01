@@ -9,6 +9,7 @@ export class Snake{
     static body: Array<Segment> = []
     static head: Head
     static ctx: CanvasRenderingContext2D
+    static tailMode: boolean = false
     
     static setHead(head: Head){
         Snake.head = head
@@ -39,15 +40,22 @@ abstract class Segment{
     static width = 16
     static velocity = 8
 
+    coordinates: Coordinates
     x: number
     y: number
     ctx: any
+    center: Coordinates
     movementDirection: Coordinates
     color: string | RGB
 
     constructor(coordinates: Coordinates, color = 'rgb(0, 207, 151)'){
+        this.coordinates = coordinates
         this.x = coordinates.x
         this.y = coordinates.y
+        this.center = {
+            x: this.x + Segment.width / 2,
+            y: this.y + Segment.height / 2
+        }
         this.color = color
         this.movementDirection = {x: 0, y: -1}
     }
@@ -60,12 +68,24 @@ abstract class Segment{
     move(){
         this.x = this.x + this.movementDirection.x * Segment.velocity
         this.y = this.y + this.movementDirection.y * Segment.velocity
+        
+        this.coordinates = {x: this.x, y: this.y}
+        this.center = {
+            x: this.x + Segment.width / 2,
+            y: this.y + Segment.height / 2
+            }
         this.draw()
     }
 
     goTo(coordinates:Coordinates){
-        this.x = coordinates.x  
+        this.coordinates = coordinates
+        this.x = coordinates.x
         this.y = coordinates.y
+        this.center = {
+            x: this.x + Segment.width / 2,
+            y: this.y + Segment.height / 2
+        }
+
         this.draw()
     }
 
@@ -126,13 +146,13 @@ export class Head extends Segment{
     
     distanceLesserThan(coordinates: Coordinates, compareWithValue: number = 16): boolean{
         let distance: Coordinates = {
-            x : this.x + (Segment.width / 2) - coordinates.x >= 0 
-            ? this.x + (Segment.width / 2) - coordinates.x
-            : coordinates.x - this.x - (Segment.width / 2),
+            x : this.center.x - coordinates.x >= 0 
+            ? this.center.x - coordinates.x
+            : coordinates.x - this.center.x,
 
-            y : this.y + (Segment.height / 2) - coordinates.y >= 0 
-            ? this.y + (Segment.height / 2) - coordinates.y
-            : coordinates.y - this.y - (Segment.height / 2) 
+            y : this.center.y - coordinates.y >= 0 
+            ? this.center.y - coordinates.y
+            : coordinates.y - this.center.y
         }
 
         return distance.x < compareWithValue && distance.y < compareWithValue

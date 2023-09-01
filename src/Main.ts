@@ -34,6 +34,13 @@ function createPlayer() {
 
     Food.pellet = new Pellet({x: 100, y: 100})
     
+    for (let i = Snake.body.length - 1; i > 0; i--) {
+        Snake.body[i].goTo(
+            {
+                x: Snake.body[i - 1].x,
+                y: Snake.body[i - 1].y
+            })
+    }
 }
 createPlayer()
 
@@ -86,7 +93,7 @@ document.addEventListener(('keydown'), (event) => {
             break
 
         case 'E':
-            Snake.body.push(new BodySegment({ x: Snake.head.x, y: Snake.head.y }))
+            Snake.body.push(new BodySegment(Snake.body[Snake.getSize() - 1].center))
             break
     }
 })
@@ -109,7 +116,16 @@ async function gameLoop(): Promise<void> {
                     x: Snake.body[i - 1].x,
                     y: Snake.body[i - 1].y
                 })
+                
+                if (i > 4){
+                          
+                    if (Snake.head.distanceLesserThan(Snake.body[i].center, 10)){
+                     
+                        gameOver = true
+                    }
+                }
             }
+
             
             Food.pellet.draw()
             Snake.head.move()
@@ -121,7 +137,7 @@ async function gameLoop(): Promise<void> {
             
 
             if (Snake.head.distanceLesserThan(Food.pellet.center)){
-                Snake.addBody(new BodySegment(Food.pellet.coordinates))
+                Snake.addBody(new BodySegment({x: -1000, y: -1000}))
                 Snake.setColors(Food.pellet.color)
                 canvas.style.borderColor = Food.pellet.color
                 score.innerText = (Snake.getSize() - 5).toString()
