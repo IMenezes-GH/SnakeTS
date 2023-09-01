@@ -58,10 +58,6 @@ abstract class Segment{
         this.y = coordinates.y
         this.draw()
     }
-    
-    valueOf(){
-        return this
-    }
 }
 
 export class BodySegment extends Segment{
