@@ -121,13 +121,18 @@ export class Head extends Segment{
         return distance
     }
     
-    isHitting(coordinates: Coordinates): boolean{
+    distanceLesserThan(coordinates: Coordinates, compare: number): boolean{
         let distance: Coordinates = {
-            x : this.x - coordinates.x > 0 ? this.x - coordinates.x - Segment.width : coordinates.x - this.x - Segment.width,
-            y : this.y - coordinates.y > 0 ? this.y - coordinates.y - Segment.height : coordinates.y - this.y - Segment.height
+            x : this.x + Segment.width / 2 - coordinates.x > 0 
+            ? this.x + Segment.width / 2 - coordinates.x
+            : coordinates.x - this.x - Segment.width / 2,
+
+            y : this.y + Segment.height / 2 - coordinates.y > 0 
+            ? this.y + Segment.width / 2 - coordinates.y
+            : coordinates.y - this.y + Segment.width / 2 
         }
         
-        return distance.x - Segment.velocity <= 0 && distance.y - Segment.velocity <= 0 
+        return distance.x < compare && distance.y < compare
         
     }
     setMovement(vector: Vector){

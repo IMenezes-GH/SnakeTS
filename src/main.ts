@@ -30,10 +30,11 @@ function createPlayer() {
     for (let i = 0; i < 4; i++) {
         Snake.addBody(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }))
     }
+
+    Food.list.push(new Pellet({x: 100, y: 100}))
+    
 }
 createPlayer()
-
-const testFood = new Pellet({x: 100, y: 100})
 
 
 // KEY EVENTS ========================================
@@ -93,28 +94,38 @@ document.addEventListener(('keydown'), (event) => {
  * Game loop events
 */
 async function gameLoop(): Promise<void> {
-
+    
     while (loop && !gameOver) {
-
+        
         await sleep(MS_PER_FRAME)
         ctx.clearRect(0, 0, canvas.width, canvas.height)
-        testFood.draw()
-
-
+        
         for (let i = Snake.body.length - 1; i > 0; i--) {
             Snake.body[i].goTo(
                 {
                     x: Snake.body[i - 1].x,
                     y: Snake.body[i - 1].y
                 })
-        }
+            }
+            
+            Food.list[0].draw()
+            Snake.head.move()
+            
+            const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
+            if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20) {
+                gameOver = true
+            }
+            
 
-        Snake.head.move()
-
-        const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
-        if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20) {
-            gameOver = true
-        }
+            
+            if (Snake.head.distanceLesserThan(Food.list[0].coordinates, 15)){
+                Snake.addBody(new BodySegment(Food.list[0].coordinates))
+                
+                Food.list[0] = new Pellet({
+                    x: Math.floor(Math.random() * canvas.width),
+                     y: Math.floor(Math.random() * canvas.height)})
+            }
+            
     }
 
     if (gameOver){
