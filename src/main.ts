@@ -121,8 +121,8 @@ async function gameLoop(): Promise<void> {
                 Snake.addBody(new BodySegment(Food.list[0].coordinates))
                 
                 Food.list[0] = new Pellet({
-                    x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.9),
-                     y: Math.floor(canvas.width * 0.1 + Math.random() * canvas.height * 0.9)})
+                    x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
+                     y: Math.floor(canvas.width * 0.1 + Math.random() * canvas.height * 0.8)})
             }
             
     }
