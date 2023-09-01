@@ -9,5 +9,5 @@ Snake game in typescript
 - [x] Food
 - [x] Scoreboard
 - [x] Color change
-- [ ] Tail segment
+- [x] Tail counter gameplay
 - [ ] Misc. Customization (hats)
