@@ -60,7 +60,7 @@ abstract class Segment{
         this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
     }
 
-    move(movement: Vector){
+    move(){
         this.x = this.x + this.movementDirection.x * Segment.velocity
         this.y = this.y + this.movementDirection.y * Segment.velocity
         this.draw()
