@@ -1,7 +1,4 @@
-interface Coordinates {
-    x: number,
-    y: number,
-}
+import { Coordinates } from "../types"
 
 export abstract class Food {
     static height = 10

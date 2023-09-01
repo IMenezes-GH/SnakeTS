@@ -1,19 +1,8 @@
+import {RGB, Coordinates} from '../types'
+
 const WINDOW_SIZE = {
     HEIGHT: window.innerHeight * 0.9,
     WIDTH: window.innerHeight * 0.9
-}
-
-type RGB = `rgb(${number}, ${number}, ${number})`
-
-interface Coordinates {
-    x: number,
-    y: number,
-}
-
-// Might be redundant
-interface Vector {
-    x: number,
-    y: number
 }
 
 export class Snake{
@@ -47,7 +36,7 @@ abstract class Segment{
     x: number
     y: number
     ctx: any
-    movementDirection: Vector
+    movementDirection: Coordinates
     color: string | RGB
 
     constructor(coordinates: Coordinates, color = 'rgb(0, 207, 151)'){
@@ -143,7 +132,7 @@ export class Head extends Segment{
         return distance.x < compareWithValue && distance.y < compareWithValue
         
     }
-    setMovement(vector: Vector){
+    setMovement(vector: Coordinates){
         if (vector.x === 1 || vector.x === -1){
             if (this.movementDirection.x === 0){
                 this.movementDirection = vector
