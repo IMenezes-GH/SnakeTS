@@ -4,7 +4,7 @@ export abstract class Food {
     static height = 10
     static width = 10
     static ctx: CanvasRenderingContext2D
-    static list: Array<Food> = []
+    static pellet: Food
 
     color: RGB = 'rgb(255, 255, 255)'
     coordinates: Coordinates

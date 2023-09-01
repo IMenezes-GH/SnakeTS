@@ -31,7 +31,7 @@ function createPlayer() {
         Snake.addBody(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }))
     }
 
-    Food.list.push(new Pellet({x: 100, y: 100}))
+    Food.pellet = new Pellet({x: 100, y: 100})
     
 }
 createPlayer()
@@ -108,7 +108,7 @@ async function gameLoop(): Promise<void> {
                 })
             }
             
-            Food.list[0].draw()
+            Food.pellet.draw()
             Snake.head.move()
             
             const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
@@ -117,11 +117,11 @@ async function gameLoop(): Promise<void> {
             }
             
 
-            if (Snake.head.distanceLesserThan(Food.list[0].center)){
-                Snake.addBody(new BodySegment(Food.list[0].coordinates))
-                Snake.setColors(Food.list[0].color)
+            if (Snake.head.distanceLesserThan(Food.pellet.center)){
+                Snake.addBody(new BodySegment(Food.pellet.coordinates))
+                Snake.setColors(Food.pellet.color)
 
-                Food.list[0] = new Pellet({
+                Food.pellet = new Pellet({
                     x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
                      y: Math.floor(canvas.width * 0.1 + Math.random() * canvas.height * 0.8)})
             }
