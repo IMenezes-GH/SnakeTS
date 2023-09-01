@@ -86,6 +86,21 @@ export class Head extends Segment{
         this.ctx.fillRect(this.x + 5, this.y + 5, 6, 4)
     }
 
+    die(){
+        this.ctx.fillStyle = this.color
+        this.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
+        
+        this.ctx.beginPath()
+        this.ctx.strokeStyle = 'black'
+        this.ctx.moveTo(this.x + 5, this.y + 5)
+        this.ctx.lineTo(this.x + 10, this.y + 10)
+        this.ctx.moveTo(this.x + 10, this.y + 5)
+        this.ctx.lineTo(this.x + 5, this.y + 10)
+
+        this.ctx.lineWidth = 2
+        this.ctx.stroke()
+    }
+
     distanceOfWall(): Coordinates{
         let distance: Coordinates = {
             x: this.x >= WINDOW_SIZE.WIDTH / 2 ? WINDOW_SIZE.WIDTH - this.x : this.x + Segment.width,

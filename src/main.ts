@@ -110,6 +110,11 @@ async function gameLoop(): Promise<void> {
             gameOver = true
         }
     }
+
+    if (gameOver){
+        Snake.head.die()
+    }
+
 }
 
 gameLoop()
