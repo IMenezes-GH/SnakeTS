@@ -33,11 +33,7 @@ export class Snake{
     static getSize() : number{
         return Snake.body.length
     }
-
-    static setContext(ctx: CanvasRenderingContext2D){
-        Snake.ctx = ctx
-    }
-
+    
 }
 
 abstract class Segment{

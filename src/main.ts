@@ -1,4 +1,4 @@
-import { Pellet } from "./food.js"
+import { Food, Pellet } from "./food.js"
 import { BodySegment, Head, Snake } from "./snake.js"
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
@@ -21,7 +21,8 @@ async function sleep(timeMS: number): Promise<any> {
 // SNAKE CREATION ==============================================
 
 function createPlayer() {
-    Snake.setContext(ctx)
+    Food.ctx = ctx
+    Snake.ctx = ctx
 
     Snake.body = []
     Snake.setHead(new Head({ x: canvas.width / 2, y: canvas.height / 2 }))
@@ -31,7 +32,8 @@ function createPlayer() {
     }
 }
 createPlayer()
-const testFood = new Pellet({x: 100, y: 100}, ctx)
+
+const testFood = new Pellet({x: 100, y: 100})
 
 
 // KEY EVENTS ========================================

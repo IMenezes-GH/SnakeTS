@@ -3,17 +3,17 @@ interface Coordinates {
     y: number
 }
 
-abstract class Food {
+export abstract class Food {
     static height = 10
     static width = 10
-    ctx: any
+    static ctx: CanvasRenderingContext2D
+    
     color: string
     coordinates: Coordinates
     x: number
     y: number
 
-    constructor(coordinates: Coordinates, ctx: RenderingContext){
-        this.ctx = ctx
+    constructor(coordinates: Coordinates){
         this.color = 'red'
         this.coordinates = coordinates
         this.x = coordinates.x
@@ -21,25 +21,25 @@ abstract class Food {
     }
 
     draw(){
-        this.ctx.fillStyle = this.color
-        this.ctx.fillRect(this.coordinates.x, this.coordinates.y, Food.height, Food.width)
+        Food.ctx.fillStyle = this.color
+        Food.ctx.fillRect(this.coordinates.x, this.coordinates.y, Food.height, Food.width)
     }
 }
 
 export class Pellet extends Food {
-    constructor(coordinates: Coordinates, ctx: RenderingContext){
-        super(coordinates, ctx)
+    constructor(coordinates: Coordinates){
+        super(coordinates)
         this.color = 'yellow'
     }
 
     draw(): void {
-        this.ctx.fillStyle = this.color
+        Food.ctx.fillStyle = this.color
 
-        this.ctx.rect(this.x - 2, this.y, 8, 4)
-        this.ctx.fill()
+        Food.ctx.rect(this.x - 2, this.y, 8, 4)
+        Food.ctx.fill()
 
-        this.ctx.rect(this.x, this.y - 2, 4, 8)
-        this.ctx.fill()
+        Food.ctx.rect(this.x, this.y - 2, 4, 8)
+        Food.ctx.fill()
 
     }
 }
