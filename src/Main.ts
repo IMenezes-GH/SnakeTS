@@ -105,7 +105,7 @@ async function gameLoop(): Promise<void> {
     
     let frame: number = 0
     let counter: number = 0
-    score.innerText = (Snake.getSize() - 5).toString()
+    score.innerText = Snake.getScore().toString()
 
     while (loop && !gameOver) {
         frame += 1
@@ -154,9 +154,9 @@ async function gameLoop(): Promise<void> {
                 Snake.addBody(new BodySegment({x: -1000, y: -1000}))
                 Snake.setColors(Food.pellet.color)
                 canvas.style.borderColor = Food.pellet.color // Changes Snake color to eaten
-                score.innerText = (Snake.getSize() - 5).toString() // Sets scoreboard
+                score.innerText = Snake.getScore().toString() // Sets scoreboard
 
-                if (Snake.getSize() - 5 >= 30){
+                if (Snake.getScore() >= 15){
                     Snake.tailMode = true
                     counter = 0
                 }

@@ -26,6 +26,10 @@ export class Snake{
         return Snake.body.length
     }
 
+    static getScore(): number{
+        return Snake.body.length - 5
+    }
+
     static setColors(color : RGB) {
         Snake.body.forEach((segment) => {
             segment.setColor(color)
