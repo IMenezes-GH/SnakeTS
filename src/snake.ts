@@ -3,6 +3,8 @@ const WINDOW_SIZE = {
     WIDTH: window.innerHeight * 0.9
 }
 
+type RGB = `rgb(${number}, ${number}, ${number})`
+
 interface Coordinates {
     x: number,
     y: number,
@@ -46,9 +48,9 @@ abstract class Segment{
     y: number
     ctx: any
     movementDirection: Vector
-    color: string
+    color: string | RGB
 
-    constructor(coordinates: Coordinates, color = '#00CF97'){
+    constructor(coordinates: Coordinates, color = 'rgb(0, 207, 151)'){
         this.x = coordinates.x
         this.y = coordinates.y
         this.color = color
@@ -71,12 +73,18 @@ abstract class Segment{
         this.y = coordinates.y
         this.draw()
     }
+
+    setColor(color:string){
+        this.color = color
+        Snake.ctx.fillStyle = color
+    }
+
 }
 
 export class BodySegment extends Segment{
 
-    constructor(coordinates:Coordinates, color='#00CF97'){
-        super(coordinates, color)
+    constructor(coordinates:Coordinates){
+        super(coordinates)
     }
 }
 
@@ -84,8 +92,8 @@ export class BodySegment extends Segment{
 
 export class Head extends Segment{
     
-    constructor(coordinates:Coordinates, color='#00CF97'){
-        super(coordinates, color)
+    constructor(coordinates:Coordinates){
+        super(coordinates)
     }
 
     draw(){

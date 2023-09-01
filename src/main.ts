@@ -119,7 +119,8 @@ async function gameLoop(): Promise<void> {
 
             if (Snake.head.distanceLesserThan(Food.list[0].center)){
                 Snake.addBody(new BodySegment(Food.list[0].coordinates))
-                
+                Snake.head.setColor('#ff0000')
+
                 Food.list[0] = new Pellet({
                     x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
                      y: Math.floor(canvas.width * 0.1 + Math.random() * canvas.height * 0.8)})
