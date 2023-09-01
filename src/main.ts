@@ -1,3 +1,4 @@
+import { Pellet } from "./food.js"
 import { BodySegment, Head, Snake } from "./snake.js"
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
@@ -29,6 +30,7 @@ function createPlayer() {
     }
 }
 createPlayer()
+const testFood = new Pellet({x: 100, y: 100}, ctx)
 
 
 // KEY EVENTS ========================================
@@ -93,6 +95,7 @@ async function gameLoop(): Promise<void> {
 
         await sleep(MS_PER_FRAME)
         ctx.clearRect(0, 0, canvas.width, canvas.height)
+        testFood.draw()
 
 
         for (let i = Snake.body.length - 1; i > 0; i--) {
@@ -103,7 +106,7 @@ async function gameLoop(): Promise<void> {
                 })
         }
 
-        Snake.head.move(Snake.head.movementDirection)
+        Snake.head.move()
 
         const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
         if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20) {
