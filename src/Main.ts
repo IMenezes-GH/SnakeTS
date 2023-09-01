@@ -103,13 +103,26 @@ document.addEventListener(('keydown'), (event) => {
 */
 async function gameLoop(): Promise<void> {
     
+    let frame: number = 0
+    let counter: number = 0
     score.innerText = (Snake.getSize() - 5).toString()
 
     while (loop && !gameOver) {
-        
+        frame += 1
         await sleep(MS_PER_FRAME)
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         
+        if (Snake.tailMode && frame % 25 === 0){
+            counter += 1
+            for (let i = 1; i < counter; i++){
+                Snake.body[Snake.getSize() - i].setColor('red')
+            }
+
+            if (counter > Snake.getSize()){
+                gameOver = true
+            }
+        }
+
         for (let i = Snake.body.length - 1; i > 0; i--) {
             Snake.body[i].goTo(
                 {
@@ -137,10 +150,17 @@ async function gameLoop(): Promise<void> {
             
 
             if (Snake.head.distanceLesserThan(Food.pellet.center)){
+
                 Snake.addBody(new BodySegment({x: -1000, y: -1000}))
                 Snake.setColors(Food.pellet.color)
-                canvas.style.borderColor = Food.pellet.color
-                score.innerText = (Snake.getSize() - 5).toString()
+                canvas.style.borderColor = Food.pellet.color // Changes Snake color to eaten
+                score.innerText = (Snake.getSize() - 5).toString() // Sets scoreboard
+
+                if (Snake.getSize() - 5 >= 30){
+                    Snake.tailMode = true
+                    counter = 0
+                }
+
 
                 Food.pellet = new Pellet({
                     x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
