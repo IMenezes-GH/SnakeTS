@@ -21,12 +21,13 @@ async function sleep(timeMS: number): Promise<any> {
 // SNAKE CREATION ==============================================
 
 function createPlayer() {
+    Snake.setContext(ctx)
 
     Snake.body = []
-    Snake.setHead(new Head({ x: canvas.width / 2, y: canvas.height / 2 }, ctx))
+    Snake.setHead(new Head({ x: canvas.width / 2, y: canvas.height / 2 }))
 
     for (let i = 0; i < 4; i++) {
-        Snake.addBody(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }, ctx))
+        Snake.addBody(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }))
     }
 }
 createPlayer()
@@ -81,7 +82,7 @@ document.addEventListener(('keydown'), (event) => {
             break
 
         case 'E':
-            Snake.body.push(new BodySegment({ x: Snake.head.x, y: Snake.head.y }, ctx))
+            Snake.body.push(new BodySegment({ x: Snake.head.x, y: Snake.head.y }))
             break
     }
 })
