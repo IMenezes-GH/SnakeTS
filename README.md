@@ -7,7 +7,7 @@ Snake game in typescript
 - [x] Wall Boundary
 - [x] Pause, continue & restart
 - [x] Food
-- [ ] Scoreboard
+- [x] Scoreboard
 - [x] Color change
 - [ ] Tail segment
 - [ ] Misc. Customization (hats)
