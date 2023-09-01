@@ -132,8 +132,6 @@ export class Head extends Segment{
             : coordinates.y - this.y - (Segment.height / 2) 
         }
 
-        console.log(distance)
-        
         return distance.x < compareWithValue && distance.y < compareWithValue
         
     }
