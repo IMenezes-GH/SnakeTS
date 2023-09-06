@@ -14,10 +14,6 @@ let gameOver: boolean = false
 canvas.height = window.innerHeight * 0.9 // SQUARE LAYOUT
 canvas.width = window.innerHeight * 0.9 // SQUARE LAYOUT
 
-async function sleep(timeMS: number): Promise<any> {
-    return new Promise(resolve => setTimeout(resolve, timeMS))
-}
-
 // ==================================================
 // SNAKE CREATION ==============================================
 
@@ -101,80 +97,83 @@ document.addEventListener(('keydown'), (event) => {
 /**
  * Game loop events
 */
-async function gameLoop(): Promise<void> {
+function gameLoop() {
     
     let frame: number = 0
     let counter: number = 0
     score.innerText = Snake.getScore().toString()
 
-    while (loop && !gameOver) {
-        frame += 1
-        await sleep(MS_PER_FRAME)
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        
-        if (Snake.tailMode && frame % 10 === 0){
-            counter += 1
-            for (let i = 1; i < counter; i++){
-                Snake.body[Snake.getSize() - i].setColor('red')
+    function step(){
+        if (loop && !gameOver) {
+            frame += 1
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            
+            if (Snake.tailMode && frame % 10 === 0){
+                counter += 1
+                for (let i = 1; i < counter; i++){
+                    Snake.body[Snake.getSize() - i].setColor('red')
+                }
+
+                if (counter > Snake.getSize()){
+                    gameOver = true
+                }
             }
 
-            if (counter > Snake.getSize()){
-                gameOver = true
-            }
-        }
-
-        for (let i = Snake.body.length - 1; i > 0; i--) {
-            Snake.body[i].goTo(
-                {
-                    x: Snake.body[i - 1].x,
-                    y: Snake.body[i - 1].y
-                })
-                
-                if (i > 4){
-                          
-                    if (Snake.head.distanceLesserThan(Snake.body[i].center, 10)){
-                     
-                        gameOver = true
+            for (let i = Snake.body.length - 1; i > 0; i--) {
+                Snake.body[i].goTo(
+                    {
+                        x: Snake.body[i - 1].x,
+                        y: Snake.body[i - 1].y
+                    })
+                    
+                    if (i > 4){
+                            
+                        if (Snake.head.distanceLesserThan(Snake.body[i].center, 10)){
+                        
+                            gameOver = true
+                        }
                     }
                 }
-            }
 
-            
-            Food.pellet.draw()
-            Snake.head.move()
-            
-            const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
-            if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20) {
-                gameOver = true
-            }
-            
-
-            if (Snake.head.distanceLesserThan(Food.pellet.center)){
-
-                Snake.addBody(new BodySegment({x: -1000, y: -1000}))
-                Snake.setColors(Food.pellet.color)
-                canvas.style.borderColor = Food.pellet.color // Changes Snake color to eaten
-                score.innerText = Snake.getScore().toString() // Sets scoreboard
-
-                if (Snake.getScore() >= 15){
-                    Snake.tailMode = true
-                    counter = 0
+                
+                Food.pellet.draw()
+                Snake.head.move()
+                
+                const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
+                if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20) {
+                    gameOver = true
                 }
+                
+
+                if (Snake.head.distanceLesserThan(Food.pellet.center)){
+
+                    Snake.addBody(new BodySegment({x: -1000, y: -1000}))
+                    Snake.setColors(Food.pellet.color)
+                    canvas.style.borderColor = Food.pellet.color // Changes Snake color to eaten
+                    score.innerText = Snake.getScore().toString() // Sets scoreboard
+
+                    if (Snake.getScore() >= 15){
+                        Snake.tailMode = true
+                        counter = 0
+                    }
 
 
-                Food.pellet = new Pellet({
-                    x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
-                     y: Math.floor(canvas.width * 0.1 + Math.random() * canvas.height * 0.8)})
-            }
-            
+                    Food.pellet = new Pellet({
+                        x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
+                        y: Math.floor(canvas.width * 0.1 + Math.random() * canvas.height * 0.8)})
+                }
+                
+        }
+
+        if (gameOver){
+            counter = 0
+            Snake.tailMode = false
+            Snake.head.die()
+        }
     }
 
-    if (gameOver){
-        counter = 0
-        Snake.tailMode = false
-        Snake.head.die()
-    }
-
+    window.requestAnimationFrame(step)
 }
 
 gameLoop()
