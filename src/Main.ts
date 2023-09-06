@@ -10,6 +10,7 @@ const score = document.getElementById('score') as HTMLHeadingElement
 const MS_PER_FRAME: number = 30
 let loop: boolean = true
 let gameOver: boolean = false
+let keypressDelay : number = 0
 
 canvas.height = window.innerHeight * 0.9 // SQUARE LAYOUT
 canvas.width = window.innerHeight * 0.9 // SQUARE LAYOUT
@@ -47,7 +48,10 @@ createPlayer()
 // KEY EVENTS ========================================
 document.addEventListener(('keydown'), (event) => {
 
+    if (keypressDelay > 0) return
+
     const KEY: string = event.key.toUpperCase()
+    keypressDelay += 3
 
     switch (KEY) {
         case 'D':
@@ -90,10 +94,6 @@ document.addEventListener(('keydown'), (event) => {
             gameOver = false
             gameLoop()
             break
-
-        case 'E':
-            Snake.body.push(new BodySegment(Snake.body[Snake.getSize() - 1].center))
-            break
     }
 })
 
@@ -101,14 +101,16 @@ document.addEventListener(('keydown'), (event) => {
  * Game loop events
 */
 function gameLoop() {
-
+    
     let frame: number = 0
     let counter: number = 0
     score.innerText = Snake.getScore().toString()
-
+    
     function step() {
         if (loop && !gameOver) {
+            console.log(keypressDelay)
             frame += 1
+            if (keypressDelay > 0) keypressDelay -= 1
 
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
