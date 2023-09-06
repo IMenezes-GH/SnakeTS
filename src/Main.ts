@@ -24,6 +24,8 @@ function createPlayer() {
     Snake.body = []
     Snake.setHead(new Head({ x: canvas.width / 2, y: canvas.height / 2 }))
 
+    console.log(BodySegment.velocity)
+
     for (let i = 0; i < 4; i++) {
         Snake.addBody(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }))
     }
@@ -168,9 +170,12 @@ function gameLoop() {
 
         if (gameOver){
             counter = 0
+            loop = false
             Snake.tailMode = false
             Snake.head.die()
+            return
         }
+        window.requestAnimationFrame(step)
     }
 
     window.requestAnimationFrame(step)
