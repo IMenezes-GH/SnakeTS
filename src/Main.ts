@@ -13,7 +13,7 @@ let gameOver: boolean = false
 let keypressDelay : number = 0
 
 canvas.height = window.innerHeight * 0.9 // SQUARE LAYOUT
-canvas.width = window.innerHeight * 0.9 // SQUARE LAYOUT
+canvas.width = window.innerWidth * 0.9 // SQUARE LAYOUT
 
 // ==================================================
 // SNAKE CREATION ==============================================
@@ -31,7 +31,7 @@ function createPlayer() {
 
     Food.pellet = new Pellet({
         x: (canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
-        y: (canvas.width * 0.1 + Math.random() * canvas.width * 0.8)
+        y: (canvas.height * 0.1 + Math.random() * canvas.height * 0.8)
     })
 
     for (let i = Snake.body.length - 1; i > 0; i--) {
@@ -165,7 +165,7 @@ function gameLoop() {
 
                 Food.pellet = new Pellet({
                     x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
-                    y: Math.floor(canvas.width * 0.1 + Math.random() * canvas.height * 0.8)
+                    y: Math.floor(canvas.height * 0.1 + Math.random() * canvas.height * 0.8)
                 })
             }
 
