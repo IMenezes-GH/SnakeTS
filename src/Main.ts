@@ -7,7 +7,7 @@ const score = document.getElementById('score') as HTMLHeadingElement
 
 // CONFIGURATION ==========================================
 
-const MS_PER_FRAME: number = 30
+const TAILMODE_THRESHOLD: number = 15
 let loop: boolean = true
 let gameOver: boolean = false
 let keypressDelay : number = 0
@@ -108,13 +108,12 @@ function gameLoop() {
     
     function step() {
         if (loop && !gameOver) {
-            console.log(keypressDelay)
             frame += 1
             if (keypressDelay > 0) keypressDelay -= 1
 
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-            if (Snake.tailMode && frame % 10 - Math.round(Snake.getSize() * 0.1) === 0) {
+            if (Snake.tailMode && frame % TAILMODE_THRESHOLD - Math.round(Snake.getSize() * 0.2) === 0) {
                 counter += 1
                 for (let i = 1; i < counter; i++) {
                     Snake.body[Snake.getSize() - i].setColor('red')
@@ -158,7 +157,7 @@ function gameLoop() {
                 canvas.style.borderColor = Food.pellet.color // Changes Snake color to eaten
                 score.innerText = Snake.getScore().toString() // Sets scoreboard
 
-                if (Snake.getScore() >= 15) {
+                if (Snake.getScore() >= TAILMODE_THRESHOLD) {
                     Snake.tailMode = true
                     counter = 0
                 }
