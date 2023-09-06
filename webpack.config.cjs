@@ -2,9 +2,11 @@ const path = require('path')
 
 module.exports = {
     entry: './dist/Main.js',
+    mode: 'production',
     module: {
         rules: [
             {
+
                 test: /.ts$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
