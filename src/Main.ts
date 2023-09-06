@@ -28,8 +28,11 @@ function createPlayer() {
         Snake.addBody(new BodySegment({ x: canvas.width / 2, y: canvas.height / 2 }))
     }
 
-    Food.pellet = new Pellet({x: 100, y: 100})
-    
+    Food.pellet = new Pellet({
+        x: (canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
+        y: (canvas.width * 0.1 + Math.random() * canvas.width * 0.8)
+    })
+
     for (let i = Snake.body.length - 1; i > 0; i--) {
         Snake.body[i].goTo(
             {
@@ -98,24 +101,24 @@ document.addEventListener(('keydown'), (event) => {
  * Game loop events
 */
 function gameLoop() {
-    
+
     let frame: number = 0
     let counter: number = 0
     score.innerText = Snake.getScore().toString()
 
-    function step(){
+    function step() {
         if (loop && !gameOver) {
             frame += 1
 
             ctx.clearRect(0, 0, canvas.width, canvas.height)
-            
-            if (Snake.tailMode && frame % 10 === 0){
+
+            if (Snake.tailMode && frame % 10 === 0) {
                 counter += 1
-                for (let i = 1; i < counter; i++){
+                for (let i = 1; i < counter; i++) {
                     Snake.body[Snake.getSize() - i].setColor('red')
                 }
 
-                if (counter > Snake.getSize()){
+                if (counter > Snake.getSize()) {
                     gameOver = true
                 }
             }
@@ -126,47 +129,48 @@ function gameLoop() {
                         x: Snake.body[i - 1].x,
                         y: Snake.body[i - 1].y
                     })
-                    
-                    if (i > 4){
-                            
-                        if (Snake.head.distanceLesserThan(Snake.body[i].center, 10)){
-                        
-                            gameOver = true
-                        }
+
+                if (i > 4) {
+
+                    if (Snake.head.distanceLesserThan(Snake.body[i].center, 10)) {
+
+                        gameOver = true
                     }
                 }
+            }
 
-                
-                Food.pellet.draw()
-                Snake.head.move()
-                
-                const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
-                if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20) {
-                    gameOver = true
+
+            Food.pellet.draw()
+            Snake.head.move()
+
+            const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
+            if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20) {
+                gameOver = true
+            }
+
+
+            if (Snake.head.distanceLesserThan(Food.pellet.center)) {
+
+                Snake.addBody(new BodySegment({ x: -1000, y: -1000 }))
+                Snake.setColors(Food.pellet.color)
+                canvas.style.borderColor = Food.pellet.color // Changes Snake color to eaten
+                score.innerText = Snake.getScore().toString() // Sets scoreboard
+
+                if (Snake.getScore() >= 15) {
+                    Snake.tailMode = true
+                    counter = 0
                 }
-                
-
-                if (Snake.head.distanceLesserThan(Food.pellet.center)){
-
-                    Snake.addBody(new BodySegment({x: -1000, y: -1000}))
-                    Snake.setColors(Food.pellet.color)
-                    canvas.style.borderColor = Food.pellet.color // Changes Snake color to eaten
-                    score.innerText = Snake.getScore().toString() // Sets scoreboard
-
-                    if (Snake.getScore() >= 15){
-                        Snake.tailMode = true
-                        counter = 0
-                    }
 
 
-                    Food.pellet = new Pellet({
-                        x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
-                        y: Math.floor(canvas.width * 0.1 + Math.random() * canvas.height * 0.8)})
-                }
-                
+                Food.pellet = new Pellet({
+                    x: Math.floor(canvas.width * 0.1 + Math.random() * canvas.width * 0.8),
+                    y: Math.floor(canvas.width * 0.1 + Math.random() * canvas.height * 0.8)
+                })
+            }
+
         }
 
-        if (gameOver){
+        if (gameOver) {
             counter = 0
             loop = false
             Snake.tailMode = false
