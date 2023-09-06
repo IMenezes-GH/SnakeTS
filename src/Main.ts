@@ -112,7 +112,7 @@ function gameLoop() {
 
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-            if (Snake.tailMode && frame % 10 === 0) {
+            if (Snake.tailMode && frame % 10 - Math.round(Snake.getSize() * 0.1) === 0) {
                 counter += 1
                 for (let i = 1; i < counter; i++) {
                     Snake.body[Snake.getSize() - i].setColor('red')
