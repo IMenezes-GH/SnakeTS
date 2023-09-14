@@ -1,8 +1,8 @@
 import { Coordinates, RGB } from "../types"
 
 export abstract class Food {
-    static height = 10
-    static width = 10
+    static height = window.innerHeight/150
+    static width = window.innerHeight/150
     static ctx: CanvasRenderingContext2D
     static pellet: Food
 
@@ -34,10 +34,10 @@ export class Pellet extends Food {
         Food.ctx.fillStyle = this.color
         Food.ctx.beginPath()
 
-        Food.ctx.rect(this.coordinates.x - 2, this.coordinates.y, 8, 4)
+        Food.ctx.rect(this.coordinates.x, this.coordinates.y, Food.width, Food.height)
         Food.ctx.fill()
 
-        Food.ctx.rect(this.coordinates.x, this.coordinates.y - 2, 4, 8)
+        Food.ctx.rect(this.coordinates.x, this.coordinates.y, Food.width, Food.height)
         Food.ctx.fill()
         Food.ctx.closePath()
     }

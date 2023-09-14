@@ -40,9 +40,9 @@ export class Snake{
 
 abstract class Segment{
 
-    static height = 16
-    static width = 16
-    static velocity = 8
+    static height = window.innerHeight/70
+    static width = window.innerHeight/70
+    static velocity = window.innerHeight/180
 
     coordinates: Coordinates
     x: number
@@ -116,12 +116,11 @@ export class Head extends Segment{
     }
 
     draw(){
+        // This adds the black eye on the snake's head
         Snake.ctx.fillStyle = this.color
         Snake.ctx.fillRect(this.x, this.y, Segment.height, Segment.width)
         Snake.ctx.fillStyle = 'black'
-        Snake.ctx.fillRect(this.x + 5, this.y + 5, 6, 4)
-
-        // TODO: Make a cute snake tongue ?
+        Snake.ctx.fillRect(this.x + Segment.width * 0.2, this.y + Segment.height * 0.2, Segment.width * 0.45, Segment.height * 0.45)
     }
 
     die(){
@@ -130,12 +129,12 @@ export class Head extends Segment{
         
         Snake.ctx.beginPath()
         Snake.ctx.strokeStyle = 'black'
-        Snake.ctx.moveTo(this.x + 5, this.y + 5)
-        Snake.ctx.lineTo(this.x + 10, this.y + 10)
-        Snake.ctx.moveTo(this.x + 10, this.y + 5)
-        Snake.ctx.lineTo(this.x + 5, this.y + 10)
+        Snake.ctx.moveTo(this.x + Segment.width * 0.3, this.y + Segment.height * 0.3)
+        Snake.ctx.lineTo(this.x + Segment.width * 0.7, this.y + Segment.height * 0.7)
+        Snake.ctx.moveTo(this.x + Segment.width * 0.7, this.y + Segment.height * 0.3)
+        Snake.ctx.lineTo(this.x + Segment.width * 0.3, this.y + Segment.height * 0.7)
 
-        Snake.ctx.lineWidth = 2
+        Snake.ctx.lineWidth = Segment.width * 0.2;
         Snake.ctx.stroke()
     }
 
@@ -148,7 +147,7 @@ export class Head extends Segment{
         return distance
     }
     
-    distanceLesserThan(coordinates: Coordinates, compareWithValue: number = 16): boolean{
+    distanceLesserThan(coordinates: Coordinates, compareWithValue: number = Segment.width): boolean{
         let distance: Coordinates = {
             x : this.center.x - coordinates.x >= 0 
             ? this.center.x - coordinates.x
