@@ -7,6 +7,7 @@ const score = document.getElementById('score') as HTMLHeadingElement
 
 // CONFIGURATION ==========================================
 
+
 const TAILMODE_THRESHOLD: number = 15
 let loop: boolean = true
 let gameOver: boolean = false

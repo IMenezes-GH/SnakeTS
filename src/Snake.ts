@@ -40,9 +40,9 @@ export class Snake{
 
 abstract class Segment{
 
-    static height = window.innerWidth/70
-    static width = window.innerWidth/70
-    static velocity = window.innerWidth/200
+    static height = window.innerHeight/70
+    static width = window.innerHeight/70
+    static velocity = window.innerHeight/200
 
     coordinates: Coordinates
     x: number

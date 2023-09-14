@@ -1,8 +1,8 @@
 import { Coordinates, RGB } from "../types"
 
 export abstract class Food {
-    static height = window.innerWidth/150
-    static width = window.innerWidth/150
+    static height = window.innerHeight/150
+    static width = window.innerHeight/150
     static ctx: CanvasRenderingContext2D
     static pellet: Food
 
