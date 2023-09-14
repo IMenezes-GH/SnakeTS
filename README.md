@@ -21,4 +21,6 @@ Snake game in typescript
 - [x] Scoreboard
 - [x] Color change
 - [x] Tail counter gameplay
-- [ ] Misc. Customization (hats)
+- [ ] **Player Settings/configuration**
+
+- [ ] *Misc. Customization (hats)*
