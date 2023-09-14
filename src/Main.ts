@@ -91,10 +91,7 @@ document.addEventListener(('keydown'), (event) => {
             break
 
         case 'R':
-            createPlayer()
-            loop = true
-            gameOver = false
-            gameLoop()
+            location.reload()
             break
     }
 })
