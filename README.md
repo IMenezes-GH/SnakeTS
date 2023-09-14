@@ -1,7 +1,10 @@
 # Typesnake
-Snake game in typescript
+A HTML canvas game written in typescript
 
-#### Keys:
+#### [Link to the game](https://imenezes-gh.github.io/SnakeTS/)
+
+
+## Keys:
 
 - W, Up Arrow (Turn up)
 - A, left arrow (Turn Left)
@@ -10,17 +13,3 @@ Snake game in typescript
 - R (restart)
 - P (pause)
 - C (continue)
-
-
-#### To-do List:
-- [x] Snake head
-- [x] Snake body
-- [x] Wall Boundary
-- [x] Pause, continue & restart
-- [x] Food
-- [x] Scoreboard
-- [x] Color change
-- [x] Tail counter gameplay
-- [ ] **Player Settings/configuration**
-
-- [ ] *Misc. Customization (hats)*
