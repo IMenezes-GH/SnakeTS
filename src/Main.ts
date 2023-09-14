@@ -12,10 +12,10 @@ let loop: boolean = true
 let gameOver: boolean = false
 let keypressDelay : number = 0
 
-canvas.height = window.innerHeight * 0.9 // SQUARE LAYOUT
-canvas.width = window.innerWidth * 0.9 // SQUARE LAYOUT
+canvas.height = window.innerHeight * 0.9
+canvas.width = window.innerWidth * 0.9 
 
-console.log(canvas.height, window.innerHeight)
+ctx.scale(1, 1)
 
 // ==================================================
 // SNAKE CREATION ==============================================
@@ -111,7 +111,7 @@ function gameLoop() {
     function step() {
         if (loop && !gameOver) {
             frame += 1
-            if (keypressDelay > 0) keypressDelay -= 1
+            if (keypressDelay > 0) keypressDelay -= 1 // Allows keypress cooldown to progress
 
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -133,7 +133,7 @@ function gameLoop() {
                         y: Snake.body[i - 1].y
                     })
 
-                if (i > 4) {
+                if (i > 6) {
 
                     if (Snake.head.distanceLesserThan(Snake.body[i].center, 10)) {
 
@@ -147,7 +147,7 @@ function gameLoop() {
             Snake.head.move()
 
             const distanceOfWall = Snake.head.distanceOfWall() // checks Snake head's distance from wall
-            if (distanceOfWall.x <= 20 || distanceOfWall.y <= 20) {
+            if (distanceOfWall.x <= BodySegment.height || distanceOfWall.y <= BodySegment.height) {
                 gameOver = true
             }
 
