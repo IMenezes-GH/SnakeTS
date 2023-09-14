@@ -42,7 +42,7 @@ abstract class Segment{
 
     static height = window.innerHeight/70
     static width = window.innerHeight/70
-    static velocity = window.innerHeight/200
+    static velocity = window.innerHeight/150
 
     coordinates: Coordinates
     x: number
