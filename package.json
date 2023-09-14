@@ -1,11 +1,13 @@
 {
-  "name": "typescript_snake",
-  "version": "1.1.0",
+  "name": "typesnake",
+  "version": "1.1.1",
   "description": "A snake canvas game",
-  "main": "./dist/main.js",
+  "private": true,
   "type": "module",
   "scripts": {
-    "test": "echo $(pwd)"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "keywords": [
     "game",
@@ -13,8 +15,8 @@
     "canvas"
   ],
   "author": "IMenezes",
-  "license": "ISC",
   "devDependencies": {
-    "ts-loader": "^9.4.4"
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
   }
 }

@@ -15,6 +15,8 @@ let keypressDelay : number = 0
 canvas.height = window.innerHeight * 0.9 // SQUARE LAYOUT
 canvas.width = window.innerWidth * 0.9 // SQUARE LAYOUT
 
+console.log(canvas.height, window.innerHeight)
+
 // ==================================================
 // SNAKE CREATION ==============================================
 

@@ -1,5 +1,6 @@
 import {RGB, Coordinates} from '../types'
 
+
 const WINDOW_SIZE = {
     HEIGHT: window.innerHeight * 0.9,
     WIDTH: window.innerWidth * 0.9
