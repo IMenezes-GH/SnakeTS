@@ -1,12 +1,11 @@
 {
   "name": "typescript_snake",
   "version": "1.1.0",
-  "description": "A snake rpg game",
+  "description": "A snake canvas game",
   "main": "./dist/main.js",
   "type": "module",
   "scripts": {
-    "test": "echo $(pwd)",
-    "build": "webpack --config webpack.config.cjs"
+    "test": "echo $(pwd)"
   },
   "keywords": [
     "game",
@@ -16,8 +15,6 @@
   "author": "IMenezes",
   "license": "ISC",
   "devDependencies": {
-    "ts-loader": "^9.4.4",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "ts-loader": "^9.4.4"
   }
 }
