@@ -147,7 +147,7 @@ export class Head extends Segment{
         return distance
     }
     
-    distanceLesserThan(coordinates: Coordinates, compareWithValue: number = 16): boolean{
+    distanceLesserThan(coordinates: Coordinates, compareWithValue: number = Segment.width): boolean{
         let distance: Coordinates = {
             x : this.center.x - coordinates.x >= 0 
             ? this.center.x - coordinates.x
