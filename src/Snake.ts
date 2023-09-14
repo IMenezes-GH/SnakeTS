@@ -134,7 +134,7 @@ export class Head extends Segment{
         Snake.ctx.moveTo(this.x + Segment.width * 0.7, this.y + Segment.height * 0.3)
         Snake.ctx.lineTo(this.x + Segment.width * 0.3, this.y + Segment.height * 0.7)
 
-        Snake.ctx.lineWidth = 2;
+        Snake.ctx.lineWidth = Segment.width * 0.2;
         Snake.ctx.stroke()
     }
 
