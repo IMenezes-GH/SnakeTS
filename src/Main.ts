@@ -9,6 +9,7 @@ const score = document.getElementById('score') as HTMLHeadingElement
 
 
 const TAILMODE_THRESHOLD: number = 15
+let TAILMODE_FRAMES = 20 
 let loop: boolean = true
 let gameOver: boolean = false
 let keypressDelay : number = 0
@@ -113,7 +114,8 @@ function gameLoop() {
 
             ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-            if (Snake.tailMode && frame % TAILMODE_THRESHOLD - Math.round(Snake.getSize() * 0.2) === 0) {
+            if (Snake.tailMode && frame % TAILMODE_FRAMES === 0) {
+
                 counter += 1
                 for (let i = 1; i < counter; i++) {
                     Snake.body[Snake.getSize() - i].setColor('red')
@@ -161,6 +163,8 @@ function gameLoop() {
                     Snake.tailMode = true
                     counter = 0
                 }
+
+                if (TAILMODE_FRAMES > 1 && Snake.getSize() % 5 === 0 ) TAILMODE_FRAMES -= 1;
 
 
                 Food.pellet = new Pellet({
