@@ -11,5 +11,3 @@ A HTML canvas game written in typescript
 - D, right arrow (Turn right)
 - S, Down arrow (Turn down)
 - R (restart)
-- P (pause)
-- C (continue)
