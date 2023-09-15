@@ -25,7 +25,7 @@ export abstract class Food {
 }
 
 export class Pellet extends Food {
-    constructor(coordinates: Coordinates){
+    constructor(coordinates: Coordinates = {x: Math.floor(window.innerWidth * 0.8 * 0.1 + Math.random() * window.innerWidth * 0.8 * 0.8), y:Math.floor(window.innerHeight * 0.8 * 0.1 + Math.random() * window.innerHeight * 0.8 * 0.8)}){
         super(coordinates)
         this.color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`
     }
