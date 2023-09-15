@@ -97,21 +97,6 @@ export default class Game {
                     Snake.head.setMovement({ x: 0, y: 1 })
 
                     break
-
-                // DEBUG CASES ========================================
-                case 'P':
-                    Game.pause()
-                    break
-
-                case 'C':
-
-                    if (!Game.loop) {
-                        Game.unpause()
-                        callback()
-                    }
-
-                    break
-
                 case 'R':
                     location.reload()
                     break
