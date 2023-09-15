@@ -65,7 +65,7 @@ export default class Game {
         Game.TAILMODE_FRAMES = 0;
     }
 
-    static ADD_KEY_EVENTS(callback: CallableFunction): void {
+    static ADD_KEY_EVENTS(): void {
         document.addEventListener(('keydown'), (event) => {
 
             if (Game.keypressDelay > 0) return

@@ -67,5 +67,5 @@ function gameLoop() {
     window.requestAnimationFrame(step)
 }
 
-Game.ADD_KEY_EVENTS(gameLoop)
+Game.ADD_KEY_EVENTS()
 gameLoop()
