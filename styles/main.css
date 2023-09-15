@@ -1,0 +1,46 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+}
+
+main{
+    min-height: 100vh;
+    background: linear-gradient(#04080F, #050a13, #171227, #171b3a);
+    
+    display: grid;
+    justify-content: center;
+    
+    text-align: center;
+    font-family:fantasy;
+    color:white;
+}
+
+#title{
+    color: #00CF97;
+}
+#canvas{
+    background-color: #04080f;
+    border-style: double;
+    border-color: #00CF97;
+}
+
+h1 {
+    margin: 0;
+}
+
+nav {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+h1 > a {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
