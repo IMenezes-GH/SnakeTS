@@ -4,6 +4,7 @@ import Game from "./Game.js"
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
 const ctx: CanvasRenderingContext2D = canvas.getContext('2d')!
+const title = document.getElementById("title") as HTMLElement
 
 // CONFIGURATION ==========================================
 
@@ -54,6 +55,7 @@ function gameLoop() {
                 Game.subTailModeFrames();
                 
                 canvas.style.borderColor = Food.pellet.color; // Changes Snake color to eaten
+                title.style.color =  Food.pellet.color;
 
                 Food.pellet = new Pellet();
             }
