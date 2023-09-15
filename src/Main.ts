@@ -12,8 +12,7 @@ canvas.width = window.innerWidth * 0.9
 
 ctx.scale(1, 1)
 
-// ==================================================
-// SNAKE CREATION ==============================================
+// SNAKE CREATION =========================================
 
 function createPlayer() {
     Food.ctx = ctx
