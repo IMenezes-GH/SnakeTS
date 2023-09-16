@@ -11,7 +11,7 @@ export default class Game {
 
     static keypressDelay: number = 0;
     static TAILMODE_MINIMUM_SCORE: number = 15; // Number of minimum points for TailMode to start
-    static TAILMODE_FRAMES: number = 20; // Number of frames needed to have passed for TailMode to progress
+    static TAILMODE_FRAMES: number = 30; // Number of frames needed to have passed for TailMode to progress
     static TAILMODE_COLOR = 'red';
     static NUM_SEGMENT_ADD = 5;
 
