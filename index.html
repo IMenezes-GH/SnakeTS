@@ -10,11 +10,19 @@
     <main>
         <nav>
             <div style="display: flex;gap:10px">
-                <h1 id="title">Typesnake <img src="./styles/src/iconmonstr-tools-14.svg" alt=""></h1>
+                <h1 id="title">Typesnake <button type="button" id="config"><img src="./styles/src/iconmonstr-tools-14.svg" alt=""></button></h1>
             </div>
             <h1>Score: <span id="score">0</span></h1>
             <h1><a href="https://github.com/IMenezes-GH/SnakeTS">Source <img src="./styles/src/iconmonstr-share-11.svg"></a></h1>
         </nav>
+        <aside class="config-aside" id="config-nav">
+            <div class="wrapper">
+                <p>speed</p>
+                <p>food</p>
+                <p>tailmode</p>
+                <p>size gain</p>
+            </div>
+        </aside>
         <canvas id="canvas"></canvas>
     </main>
     <script type="module" src="./src/Main.ts"></script>

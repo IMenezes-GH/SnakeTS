@@ -1,6 +1,7 @@
 import { Food, Pellet } from "./Food.js"
 import { Head, Snake } from "./Snake.js"
 import Game from "./Game.js"
+import { configHandler } from "./Config.js"
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
 const ctx: CanvasRenderingContext2D = canvas.getContext('2d')!
@@ -12,6 +13,8 @@ canvas.height = window.innerHeight * 0.9
 canvas.width = window.innerWidth * 0.9
 
 ctx.scale(1, 1)
+
+configHandler();
 
 // SNAKE CREATION =========================================
 
