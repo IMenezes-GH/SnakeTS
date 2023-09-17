@@ -1,7 +1,7 @@
 import { Food, Pellet } from "./Food.js"
 import { Head, Snake } from "./Snake.js"
 import Game from "./Game.js"
-import { configHandler } from "./Config.js"
+import { configHandler, configView } from "./Config.js"
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement
 const ctx: CanvasRenderingContext2D = canvas.getContext('2d')!
@@ -41,6 +41,8 @@ function gameLoop() {
             Game.addFrame();
             Game.clear();
             
+            configView()
+
             Game.tailModeEventHandler();
             
             Snake.moveBody(); // Move full body first
