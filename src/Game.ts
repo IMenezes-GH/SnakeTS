@@ -15,6 +15,9 @@ export default class Game {
     static TAILMODE_COLOR = 'red';
     static NUM_SEGMENT_ADD = 5;
 
+    set NUM_SEGMENT_ADD(num: number){
+        Game.NUM_SEGMENT_ADD = num;
+    }
 
     static loop: boolean = true;
     static lost: boolean = false;
